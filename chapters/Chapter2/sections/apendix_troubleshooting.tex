@@ -1,0 +1,48 @@
+% !TeX root = ../main.tex
+\label{app:trouble}
+\subsubsection{Setup Parts}
+	Here the full list off all optical components used in the setup described here.
+	\begin{itemize}
+		\item [laser] ThorLabs
+		\item[14 mirrors] silver mirrors form ThorLabs product number 
+	\end{itemize}
+\subsubsection{alignment troubleshooting guide}
+Here is my adaptation of \hyperref{jonkman2020tutorial}{Jonkman's troubleshooting guide} for imaging and time traces, but do see theirs for more details\cite{jonkman2020tutorial}.
+\begin{description}
+	\item \textbf{Is it the microscope?}
+	\begin{enumerate}
+		\item If there is no signal at all, in either the scattering or in fluorescence channels:
+		\begin{description}
+			\item[Working from back to front]
+			\item[Is detection possible?] Are all of the hardware components (main switch/laser, including key, power supplies for detectors and stage) turned on?
+			\item[Is the software connected to the detectors and the pi stage?] If not turn them off and on again and run the compact rio connection software
+			\item[Is the sample illuminated?] Can you see whether laser light is emitted from the objective lens? This is also a good moment to check if you are in the right focal plane using the bright field mode.
+			\item[Is something blocking teh beam path?] Trace the light path from the light source to the sample, and from the sample to the detector, checking each component.
+			\item[Are you using enough laser power?] Our setup can anomalously attenuate the laser power using polarisation optics. The power could be set too low to give a signal.
+		\end{description}
+		\item If the sample appears weak and/or blurry in the z-direction, or you cannot focus:
+		\begin{description}
+			\item[Is there a bubble in your oil?] Bubble can ocuure when changeing focus rapidly over a bif distance or during every attachemnt of the oil and the sample. If they occure, blowing them away or chaning the oil is enough.
+			\item[How does the coma look?] Test this in wide field or on a block placed in the detection path and moving the objective up and down. maybe the objective or sample are mouted tilted. 
+			\item[Is the objective hitting the edge?] If you are too close to the edge of a sample the edge of the objective might be stuck on the edge of the sample and not be able to physically move closer.
+			\item[Is there something placed in the uncollumated beam path? ] Attenuators and filters placed in an uncollumated beam can displace it. An uncentered beam will cause focal wobble.
+			\item[Is the objective clean?] We use lens cleaning tissues and methanol to clean the lens. The thorlabs website has a good viddeo explaining ow to do this\cite{Thorlabs2025OpticsHandling}. this has to be done after every experiment, to avoid damage to the lens surface coating. 
+			\item[Is the objective stuck?] Our objective has a spring-loaded front lens, it could become stuck in the compressed position. 
+			\item[Could the objective be damaged (oil inside, scratched)? ] Take it out (or ask facility staff to have a look) and check it under a stereo microscope.
+		\end{description}
+	\end{enumerate}
+	\item \textbf{Is it your sample?}
+	\begin{enumerate}
+		\item Basic checks:
+		\begin{description}
+			\item[Is the cip the right thickness?] Our objective requires chips and coverslips of 170-$\mu$m-thickness (\# 1.5)
+			\item[test another sample] Standard samples for us are electrodes or \gls{gnr}. Can you get a good image now? Are the intensities as expected?
+			\item[Has your sample dilution deterioreated?] We have noticed our dilutions deteriourating over time. We suspect the particles clumping and falling out. making a fresh dilution everytime for partices is adviseable.
+		\end{description}
+		\item Has the sample been damaged or degraded?
+		\begin{description}
+			\item[Is the galss or the well corrupted?] Especially with our \gls{gnr} samples, which are imaged in HCl this can be dangerous for the objective and need to be detected early. PDMS wells can be leaky and suck particles out. 
+			\item[How long ave you imaged?] Our fluorecent particles can bleach over time in the laser and room light. 
+		\end{description}
+	\end{enumerate}
+\end{description}

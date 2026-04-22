@@ -1,3 +1,8 @@
+%% ------------------------------------------------------------------
+%% Custom preamble additions by Janike Bolter
+%% Based on dissertation.cls template
+%% Safe to edit; avoid geometry/layout changes unless necessary
+%% ------------------------------------------------------------------
 %!TEX root = ../main.tex
 \ProvidesPackage{preamble}
 
@@ -6,21 +11,78 @@
 \setcounter{secnumdepth}{3}
 
 \usepackage{amsmath}    % need for subequations
-\usepackage[ruled]{algorithm2e} % For algorithms
-\renewcommand{\algorithmcfname}{ALGORITHM}
+%\usepackage[ruled]{algorithm2e} % For algorithms
+%\renewcommand{\algorithmcfname}{ALGORITHM}
 \usepackage{graphicx}   % need for figures
 \usepackage{epsfig} % figure
-\usepackage{amssymb} % http://ctan.org/pkg/amssymb
+%\usepackage{amssymb} % http://ctan.org/pkg/amssymb
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{rotating} % ROtating text
-\usepackage{pdfpages}
+\usepackage{cleveref} %reference with "figure xx"
+
+% Image/Picture Preamble
+\usepackage{float}
+\usepackage{caption}
+\usepackage[subrefformat=parens]{subcaption} % For multiple subfigures
+\usepackage[figurename=Figure, tablename=Table, labelfont=bf]{caption}
+\usepackage{sidecap} % Caption beside the figure
+\usepackage{wrapfig}
+\usepackage{svg}
+
+% Language Preamble
+\AtBeginDocument{\renewcommand{\contentsname}{Table of Contents}} % Ensure TOC title is updated
+\usepackage{fontspec}
+
+\setmainfont{BOOK}[
+    Path = fonts/,
+    Extension = .TTF,
+    UprightFont = *OS,
+    BoldFont = *OSB,
+    ItalicFont = *OSI,
+    BoldItalicFont = *OSBI
+]
+
+\setsansfont{TA}[
+    Path = fonts/,
+    Extension = .TTF,
+    UprightFont = *HOMA,
+    BoldFont = *HOMABD
+]
+
+\setmathfont{CAMBRIA}[
+    Path = fonts/, FontIndex=1,
+    Extension = .TTC
+]
+
+% Fonts and Quotation Marks
+\usepackage{amsfonts}
+\usepackage{csquotes} % Correct quotation marks
+
+% Tabular Preamble
+\usepackage{longtable} % Tables across pages
+\usepackage{tabularx}
+\usepackage{diagbox}
+\usepackage{colortbl} % Colored tables
+
+% Units and Symbols
+\usepackage{textcomp}
+
+% Formula Preamble
+\usepackage{amstext}
+\usepackage{multicol} % One/two-column formatting
+
+% Additional Features
+\usepackage[misc]{ifsym}
+\usepackage{pifont}
 
 %% Landscape pages with decent float handling
 \usepackage{pdflscape}
 \usepackage{afterpage}
 \usepackage{flafter}
 \usepackage{fancyhdr}
+	\setlength{\headheight}{22.8pt}
+	\addtolength{\topmargin}{-10.8pt}
 \fancypagestyle{lscape}{% 
 \fancyhf{} % clear all header and footer fields 
 \fancyfoot[LE]{}
@@ -29,31 +91,29 @@
 \renewcommand{\footrulewidth}{0pt}}
 %%
 
-\usepackage{mathtools}
+%\usepackage{mathtools} %cls contains mathtools
 \usepackage{ulem} %fors strikethrough
 
 \usepackage[nottoc]{tocbibind} % To show bibliography in TOC
-\usepackage[sort&compress]{natbib}
+\setcitestyle{super,comma,sort&compress}
+%\usepackage[sort&compress]{natbib}
 % \bibliographystyle{unsrt}
 \RequirePackage{doi}
-\usepackage{hyperref}
 \usepackage{bibentry} % Used for full bibliography prints
 \nobibliography* % Used for full bibliography prints
-
+\usepackage[sectionbib]{chapterbib}
 
 
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
-\usepackage{subfigure}
 \usepackage{booktabs}
 
 \usepackage{array}
 \renewcommand{\arraystretch}{1.5}
 
-
-\usepackage{epstopdf}
+%\usepackage{epstopdf}
 \usepackage{placeins}
 \usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize]{todonotes} % [disable] : to disable notes without deleting them manually
 \setlength{\marginparwidth}{2cm}
@@ -61,13 +121,18 @@
 
 \usepackage[acronym,toc]{glossaries}
 \glsdisablehyper
-\ifdraft
-    % do nothing
-\else
-    \makeglossaries % generate acronyms list (create makeindex files)
-\fi
+\makeglossaries % generate acronyms list (create makeindex files)
+\loadglsentries{acronyms}
+\loadglsentries{glossary}
+%\ifdraft
+%   \makeglossaries % generate acronyms list (create makeindex files)
+%   \loadglsentries{acronyms}
+%   \loadglsentries{glossary}
+%\else
+%    \makeglossaries % generate acronyms list (create makeindex files)
+%\fi
 \ifreview
-    \geometry{a4paper, portrait, margin=1.5in}
+    %\geometry{a4paper, portrait, margin=1.5in}
     \usepackage[modulo]{lineno} % Used for line numbering
     \linenumbers
     \usepackage{setspace} % Used for double line spacing
@@ -75,8 +140,6 @@
     \setstretch{2}
 \fi
 
- 
-\include{acronyms}
 \usepackage{siunitx} %for correct unit spacing
 \usepackage[super]{nth}
 \usepackage{gensymb} % Used for \degree
@@ -84,7 +147,6 @@
 \usepackage{colortbl}
 \usepackage{import} % for relative paths within included files
 \usepackage{wallpaper} % for background images
-
 
 % \linespread{1.3} % Adjust line spacing
 
@@ -97,6 +159,10 @@
 \newcommand{\sectionname}{Section}
 \newcommand{\rqname}{RQ}
 \newcommand{\hypname}{Hypothesis}
+\renewcommand{\bibname}{References}  % for book/report classes
+
+\newcommand{\scat}{scattering }
+\newcommand{\fl}{fluorescence } 
 
 %% Make inline Associate Editor or reviewers' comments optional
 \newcommand{\aecomment}[1]{
@@ -122,7 +188,6 @@
   \renewcommand*{\do}[1]{\nextitem\textbf{\glsentryshort{##1}}: \glsentrylong{##1}}% How to process each item
   \docsvlist{#2}% Process list
 }
-
 
 %% Research Question Environment
 %Numbered environment
@@ -163,8 +228,6 @@
   }%
 }
 
-
-
 % \pagecolor[rgb]{0.2,0.2,0.2}
 % \color[rgb]{1,1,1}
 
@@ -188,4 +251,3 @@
 \newif\ifchapsix
 \newif\ifchapseven
 \newif\ifchapeight
-
